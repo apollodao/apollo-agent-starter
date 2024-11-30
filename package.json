@@ -7,7 +7,16 @@
     "build": "tsup --format esm --dts",
     "start": "tsc && node --loader ts-node/esm src/index.ts",
     "start:service:all": "pm2 start pnpm --name=\"all\" --restart-delay=3000 --max-restarts=10 -- run start:all",
-    "stop:service:all": "pm2 stop all"
+    "stop:service:all": "pm2 stop all",
+    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+    "clean": "bash ./scripts/clean.sh",
+    "docker:build": "bash ./scripts/docker.sh build",
+    "docker:run": "bash ./scripts/docker.sh run",
+    "docker:bash": "bash ./scripts/docker.sh bash",
+    "docker:start": "bash ./scripts/docker.sh start",
+    "install": "pnpm install --include=optional sharp && node-pre-gyp rebuild",
+    "postinstall": "node-pre-gyp install --fallback-to-build",
+    "docker": "pnpm docker:build && pnpm docker:run && pnpm docker:bash"
   },
   "dependencies": {
     "@ai16z/adapter-postgres": "latest",
@@ -30,11 +39,6 @@
   },
   "engines": {
     "node": ">=22"
-  },
-  "pnpm": {
-    "overrides": {
-      "onnxruntime-node": "^1.20.0"
-    }
   },
   "devDependencies": {
     "ts-node": "10.9.2",
