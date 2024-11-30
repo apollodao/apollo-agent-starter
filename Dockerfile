@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libgif-dev \
     librsvg2-dev \
-    # Additional dependencies for @discordjs/opus
     libopus-dev \
     ffmpeg
 
