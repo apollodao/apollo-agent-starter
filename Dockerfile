@@ -11,11 +11,15 @@ RUN apt-get update && apt-get install -y \
     libpango1.0-dev \
     libjpeg-dev \
     libgif-dev \
-    librsvg2-dev
+    librsvg2-dev \
+    # Additional dependencies for @discordjs/opus
+    libopus-dev \
+    ffmpeg
 
 # Set environment variables
 ENV CI=false
 ENV NIXPACKS_PATH=/app/node_modules/.bin:$NIXPACKS_PATH
+ENV NODE_ENV=production
 
 # Copy package.json and pnpm-lock.yaml
 COPY package.json pnpm-lock.yaml ./
@@ -23,8 +27,8 @@ COPY package.json pnpm-lock.yaml ./
 # Install pnpm
 RUN npm install -g pnpm
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile
+# Install dependencies with additional flags for better compatibility
+RUN pnpm install --frozen-lockfile --unsafe-perm
 
 # Copy the rest of your application code
 COPY . .
