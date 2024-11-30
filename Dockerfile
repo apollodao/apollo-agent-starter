@@ -26,14 +26,17 @@ COPY package.json pnpm-lock.yaml ./
 # Install pnpm
 RUN npm install -g pnpm
 
-# Install dependencies with additional flags for better compatibility
-RUN pnpm install --frozen-lockfile --unsafe-perm
+# Install ALL dependencies (including dev dependencies) for build step
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of your application code
 COPY . .
 
 # Build your application
 RUN pnpm run build
+
+# Remove dev dependencies for production
+RUN pnpm prune --prod
 
 # Start your application
 CMD ["pnpm", "start"]
