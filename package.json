@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts",
+    "build": "tsup --format esm --dts",
     "start": "tsc && node --loader ts-node/esm src/index.ts",
     "start:service:all": "pm2 start pnpm --name=\"all\" --restart-delay=3000 --max-restarts=10 -- run start:all",
     "stop:service:all": "pm2 stop all",
@@ -14,7 +14,8 @@
     "docker:run": "bash ./scripts/docker.sh run",
     "docker:bash": "bash ./scripts/docker.sh bash",
     "docker:start": "bash ./scripts/docker.sh start",
-    "install": "pnpm install --include=optional sharp",
+    "install": "pnpm install --include=optional sharp && node-pre-gyp rebuild",
+    "postinstall": "node-pre-gyp install --fallback-to-build",
     "docker": "pnpm docker:build && pnpm docker:run && pnpm docker:bash"
   },
   "dependencies": {
@@ -34,23 +35,14 @@
     "better-sqlite3": "^11.5.0",
     "readline": "^1.3.0",
     "ws": "^8.18.0",
-    "yargs": "17.7.2",
-    "tsup": "^8.3.5"
+    "yargs": "17.7.2"
   },
   "engines": {
     "node": ">=22"
   },
-  "pnpm": {
-    "overrides": {
-      "onnxruntime-node": "^1.20.0",
-      "@discordjs/opus": "github:discordjs/opus"
-    }
-  },
   "devDependencies": {
     "ts-node": "10.9.2",
+    "tsup": "^8.3.5",
     "typescript": "^5.6.3"
-  },
-  "optionalDependencies": {
-    "@discordjs/opus": "^0.9.0"
   }
 }

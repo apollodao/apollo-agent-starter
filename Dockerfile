@@ -1,42 +1,36 @@
-FROM node:23-bullseye
+FROM node:23.1.0
 
+#Install pnpm globally
+RUN npm install -g pnpm@9.4.0
+
+# Set the working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    build-essential \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libjpeg-dev \
-    libgif-dev \
-    librsvg2-dev \
-    libopus-dev \
-    ffmpeg
+# Add configuration files and install dependencies
+ADD pnpm-workspace.yaml /app/pnpm-workspace.yaml
+ADD package.json /app/package.json
+ADD .npmrc /app/.npmrc
+ADD tsconfig.json /app/tsconfig.json
+ADD pnpm-lock.yaml /app/pnpm-lock.yaml
+RUN pnpm i
 
-# Set environment variables
-ENV CI=false
-ENV NIXPACKS_PATH=/app/node_modules/.bin:$NIXPACKS_PATH
-ENV NODE_ENV=production
+# Add the documentation
+ADD docs /app/docs
+RUN pnpm i
 
-# Copy package.json and pnpm-lock.yaml
-COPY package.json pnpm-lock.yaml ./
+# Add the rest of the application code
+ADD packages /app/packages
+RUN pnpm i
 
-# Install pnpm
-RUN npm install -g pnpm
+# Add the environment variables
+ADD scripts /app/scripts
+ADD characters /app/characters
 
-# Install ALL dependencies (including dev dependencies) for build step
-RUN pnpm install --frozen-lockfile
+#   Build the application
+RUN pnpm build
 
-# Copy the rest of your application code
-COPY . .
+# Expose the port
+EXPOSE 3000
 
-# Build your application
-RUN pnpm run build
-
-# Remove dev dependencies for production
-RUN pnpm prune --prod
-
-# Start your application
-CMD ["pnpm", "start"]
+# Start command
+CMD ["pnpm", "start", "--character=characters/eliza.character.json"]
