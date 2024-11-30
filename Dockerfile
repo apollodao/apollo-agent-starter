@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 ENV CI=false
 ENV NIXPACKS_PATH=/app/node_modules/.bin:$NIXPACKS_PATH
 
-# Copy package.json and pnpm-lock.yaml
+# Copy package files first
 COPY package.json pnpm-lock.yaml ./
 
 # Install pnpm
@@ -27,6 +27,7 @@ RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 
 # Copy the rest of your application code
+# (node_modules will be excluded by .dockerignore)
 COPY . .
 
 # Build your application
