@@ -14,13 +14,6 @@ ADD tsconfig.json /app/tsconfig.json
 ADD pnpm-lock.yaml /app/pnpm-lock.yaml
 RUN pnpm i
 
-# Add the documentation
-ADD docs /app/docs
-RUN pnpm i
-
-# Add the rest of the application code
-RUN pnpm i
-
 # Add the environment variables
 ADD scripts /app/scripts
 ADD characters /app/characters
