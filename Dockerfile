@@ -19,7 +19,6 @@ ADD docs /app/docs
 RUN pnpm i
 
 # Add the rest of the application code
-ADD packages /app/packages
 RUN pnpm i
 
 # Add the environment variables
