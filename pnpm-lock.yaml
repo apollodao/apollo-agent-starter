@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  onnxruntime-node: ^1.20.0
-
 dependencies:
   '@ai16z/adapter-postgres':
     specifier: latest
@@ -2105,7 +2102,7 @@ packages:
   /@echogarden/transformers-nodejs-lite@2.17.1-lite.3(onnxruntime-node@1.20.1):
     resolution: {integrity: sha512-qD9kvrL1xmce0iiiNEyqq2GW1qoksqvdOpww3Gsgqx/O9tdU/M2R78fji9opY+QU9u8OKH9L+ZzsOQdF5FixZA==}
     peerDependencies:
-      onnxruntime-node: ^1.20.0
+      onnxruntime-node: '*'
     dependencies:
       '@huggingface/jinja': 0.2.2
       onnxruntime-node: 1.20.1
@@ -2391,7 +2388,7 @@ packages:
     resolution: {integrity: sha512-lXmF0/p+ZdQX0NKTybLUCzIKr0sKD6BfqtjL7olaLx2JHAM3HKVrvFjWeFe2lQRkhL6cEcFw2WXs7o8nZU/WGg==}
     dependencies:
       '@huggingface/jinja': 0.3.2
-      onnxruntime-node: 1.20.1
+      onnxruntime-node: 1.19.2
       onnxruntime-web: 1.21.0-dev.20241024-d9ca84ef96
       sharp: 0.33.5
     dev: false
@@ -6677,7 +6674,7 @@ packages:
     resolution: {integrity: sha512-Y14v+FWZwjNUpQ7mRGYu4N5yF+hZkF7zqzPWzzLbwdIEtYsHy0DSpiVJ+Fg6Oi1fQjrBKASQt0hdSMSjw1/Wtw==}
     dependencies:
       '@anush008/tokenizers': 0.0.0
-      onnxruntime-node: 1.20.1
+      onnxruntime-node: 1.15.1
       progress: 2.0.3
       tar: 6.2.1
     dev: false
@@ -8795,12 +8792,36 @@ packages:
       mimic-function: 5.0.1
     dev: false
 
+  /onnxruntime-common@1.15.1:
+    resolution: {integrity: sha512-Y89eJ8QmaRsPZPWLaX7mfqhj63ny47rSkQe80hIo+lvBQdrdXYR9VO362xvZulk9DFkCnXmGidprvgJ07bKsIQ==}
+    dev: false
+
+  /onnxruntime-common@1.19.2:
+    resolution: {integrity: sha512-a4R7wYEVFbZBlp0BfhpbFWqe4opCor3KM+5Wm22Az3NGDcQMiU2hfG/0MfnBs+1ZrlSGmlgWeMcXQkDk1UFb8Q==}
+    dev: false
+
   /onnxruntime-common@1.20.0-dev.20241016-2b8fc5529b:
     resolution: {integrity: sha512-KZK8b6zCYGZFjd4ANze0pqBnqnFTS3GIVeclQpa2qseDpXrCQJfkWBixRcrZShNhm3LpFOZ8qJYFC5/qsJK9WQ==}
     dev: false
 
   /onnxruntime-common@1.20.1:
     resolution: {integrity: sha512-YiU0s0IzYYC+gWvqD1HzLc46Du1sXpSiwzKb63PACIJr6LfL27VsXSXQvt68EzD3V0D5Bc0vyJTjmMxp0ylQiw==}
+    dev: false
+
+  /onnxruntime-node@1.15.1:
+    resolution: {integrity: sha512-wzhVELulmrvNoMZw0/HfV+9iwgHX+kPS82nxodZ37WCXmbeo1jp3thamTsNg8MGhxvv4GmEzRum5mo40oqIsqw==}
+    os: [win32, darwin, linux]
+    dependencies:
+      onnxruntime-common: 1.15.1
+    dev: false
+
+  /onnxruntime-node@1.19.2:
+    resolution: {integrity: sha512-9eHMP/HKbbeUcqte1JYzaaRC8JPn7ojWeCeoyShO86TOR97OCyIyAIOGX3V95ErjslVhJRXY8Em/caIUc0hm1Q==}
+    os: [win32, darwin, linux]
+    requiresBuild: true
+    dependencies:
+      onnxruntime-common: 1.19.2
+      tar: 7.4.3
     dev: false
 
   /onnxruntime-node@1.20.1:
