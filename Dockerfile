@@ -11,7 +11,7 @@ ADD package.json /app/package.json
 ADD .npmrc /app/.npmrc
 ADD tsconfig.json /app/tsconfig.json
 ADD pnpm-lock.yaml /app/pnpm-lock.yaml
-RUN pnpm install --include=optional sharp 
+RUN pnpm install --frozen-lockfile --include=optional sharp 
 
 # Add the environment variables
 ADD scripts /app/scripts
