@@ -1,6 +1,6 @@
 FROM node:23.1.0
 
-#Install pnpm globally
+# Install pnpm globally
 RUN npm install -g pnpm@9.4.0
 
 # Set the working directory
@@ -26,7 +26,7 @@ RUN pnpm i
 ADD scripts /app/scripts
 ADD characters /app/characters
 
-#   Build the application
+# Build the application
 RUN pnpm build
 
 # Expose the port

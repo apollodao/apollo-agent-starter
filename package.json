@@ -33,7 +33,9 @@
     "@ai16z/plugin-solana": "latest",
     "@ai16z/plugin-starknet": "latest",
     "better-sqlite3": "^11.5.0",
+    "optional": "^0.1.4",
     "readline": "^1.3.0",
+    "sharp": "^0.33.5",
     "ws": "^8.18.0",
     "yargs": "17.7.2"
   },
