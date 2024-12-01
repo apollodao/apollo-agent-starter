@@ -7,7 +7,6 @@ RUN npm install -g pnpm@9.4.0
 WORKDIR /app
 
 # Add configuration files and install dependencies
-ADD pnpm-workspace.yaml /app/pnpm-workspace.yaml
 ADD package.json /app/package.json
 ADD .npmrc /app/.npmrc
 ADD tsconfig.json /app/tsconfig.json
